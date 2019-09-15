@@ -1,9 +1,19 @@
-#Task #1
+
+"""
+Домашнее задание №1
+Цикл for: Оценки
+* Создать список из словарей с оценками учеников разных классов 
+  школы вида [{'school_class': '4a', 'scores': [3,4,4,5,2]}, ...]
+* Посчитать и вывести средний балл по всей школе.
+* Посчитать и вывести средний балл по каждому классу.
+"""
+
+#Task slides #1
 list = [item for item in range(10)]
 for i in list:
     print(i+1)
 
-#Task #2
+#Task slides #2
 incoming_str = input("Enter str: ")
 for i in incoming_str:
     print(i)
