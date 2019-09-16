@@ -9,9 +9,8 @@
 * При помощи условного оператора if и ephem.constellation научите 
   бота отвечать, в каком созвездии сегодня находится планета.
 """
-import logging, settings
+import logging, settings, ephem, datetime
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from ephem import *
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
@@ -31,29 +30,35 @@ def talk_to_me(bot, update):
     update.message.reply_text(user_text)
 
 def check_constellation(bot, update):
-    planet_name = date.message.text.split()[1]
-    print(planet_name)
-    year = '2019'
+    planet_name = update.message.text.split()[1]
+    current_date = datetime.datetime.now()
     if planet_name == 'Mars':
-        planet_date = Mars(year)
-    elif planet_name == 'Moon':
-        planet_date = Moon(year)
+        planet_date = ephem.Mars(current_date)
+        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
     elif planet_name == 'Mercury':
-        planet_date = Mercury(year)
+        planet_date = ephem.Mercury(current_date)
+        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
     elif planet_name == 'Jupiter':
-        planet_date = Jupiter(year)
+        planet_date = ephem.Jupiter(current_date)
+        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
     elif planet_name == 'Neptune':
-        planet_date = Neptune(year)
-    elif planet_name == 'Earth':
-        planet_date = Earth(year)
+        planet_date = ephem.Neptune(current_date)
+        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
     elif planet_name == 'Venus':
-        planet_date = Venus(year)
+        planet_date = ephem.Venus(current_date)
+        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
     elif planet_name == 'Saturn':
-        planet_date = Saturn(year)
+        planet_date = ephem.Saturn(current_date)
+        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
     elif planet_name == 'Uranus':
-        planet_date = Uranus(year)
-    text_to_be_replied = constellation(planet_date)[1]
-    update.message.reply_text(text_to_be_replied)    
+        planet_date = ephem.Uranus(current_date)
+        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
+    elif planet_name == 'Moon':
+        planet_date = ephem.Moon(current_date)
+        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
+    else:
+        update.message.reply_text("I know nothing about this planet")
+ 
 
 def main():
     mybot = Updater(settings.API_KEY, request_kwargs=settings.PROXY)
