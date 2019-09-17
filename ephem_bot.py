@@ -30,36 +30,15 @@ def talk_to_me(bot, update):
     update.message.reply_text(user_text)
 
 def check_constellation(bot, update):
+    all_known_planets = ['Mars','Mercury','Jupiter','Neptune','Venus','Saturn','Uranus','Moon']
     planet_name = update.message.text.split()[1]
-    current_date = datetime.datetime.now()
-    if planet_name == 'Mars':
-        planet_date = ephem.Mars(current_date)
-        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
-    elif planet_name == 'Mercury':
-        planet_date = ephem.Mercury(current_date)
-        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
-    elif planet_name == 'Jupiter':
-        planet_date = ephem.Jupiter(current_date)
-        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
-    elif planet_name == 'Neptune':
-        planet_date = ephem.Neptune(current_date)
-        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
-    elif planet_name == 'Venus':
-        planet_date = ephem.Venus(current_date)
-        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
-    elif planet_name == 'Saturn':
-        planet_date = ephem.Saturn(current_date)
-        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
-    elif planet_name == 'Uranus':
-        planet_date = ephem.Uranus(current_date)
-        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
-    elif planet_name == 'Moon':
-        planet_date = ephem.Moon(current_date)
-        update.message.reply_text(f'{planet_name} now in {ephem.constellation(planet_date)[1]} constellation')
+    if planet_name in all_known_planets:
+        current_date = datetime.datetime.now()
+        result_constellation = ephem.constellation(getattr(ephem,planet_name)(current_date))[1]
+        update.message.reply_text(f'{planet_name} now in {result_constellation} constellation')
     else:
         update.message.reply_text("I know nothing about this planet")
  
-
 def main():
     mybot = Updater(settings.API_KEY, request_kwargs=settings.PROXY)
     
