@@ -10,16 +10,17 @@
 * Вызвать функцию несколько раз, передавая ей разные праметры 
   и выводя на экран результаты
 """
+# импорты прописываются в самом начале
+from collections import Counter
 
 def check_strings(incoming_string_one, incoming_string_two):
-    from collections import Counter
     if type(incoming_string_one) != str or type(incoming_string_two) != str:
         return 0
     else:
+        # это условие одинаковых строк? кажется оно проверяет наборы букв в строке, но не их одинаковость
         if Counter(incoming_string_one) == Counter(incoming_string_two):
             return 1
-        else:
-            if len(incoming_string_one) > len(incoming_string_two):
+        elif len(incoming_string_one) > len(incoming_string_two):
                 return 2
             elif incoming_string_two == 'learn':
                 return 3  

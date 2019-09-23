@@ -30,8 +30,11 @@ counter = 0
 for mark in marks:
     average_class_marks = sum(mark['scores'])/len(mark['scores'])
     print(f"Average score for class {mark['school_class']} is {average_class_marks}")
-    for i in mark['scores']:
-        counter = counter + 1
-        average_school_marks = average_school_marks + i
+    # можно сделать проще
+    counter = counter + len(mark['scores'])
+    average_school_marks = average_school_marks + sum(mark['scores'])
+    # for i in mark['scores']:
+    #     counter = counter + 1
+    #     average_school_marks = average_school_marks + i
 average_school_marks = average_school_marks / counter
 print(f"Average score for school is {average_school_marks}") 
